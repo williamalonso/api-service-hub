@@ -1,5 +1,8 @@
 import User from '../models/User';
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -23,19 +26,22 @@ export const createUser = async (req: Request, res: Response) => {
   }
 }
 
-export const loginUser = (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response) => {
   
   const { email } = req.body;
 
   try {
     
-    const user = User.findOne({ email });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).json({ message: 'User does not exist' });
     }
 
-    // Se as credenciais estiverem corretas, você pode gerar um token JWT ou criar uma sessão de usuário aqui
+    // If user exists, generate JWT token
+    const token = jwt.sign({ userId: user._id}, JWT_SECRET, {
+      expiresIn: '1h',
+    });
 
     res.status(200).json({ message: 'Login successfull' });
   } catch(e) {

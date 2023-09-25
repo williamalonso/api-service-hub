@@ -1,8 +1,7 @@
 import User from '../models/User';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = process.env.JWT_SECRET;
+import JWT_SECRET from '../config/tokenJWT';
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -28,7 +27,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const loginUser = async (req: Request, res: Response) => {
   
-  const { email } = req.body;
+  const { email, password } = req.body;
 
   try {
     
@@ -37,13 +36,16 @@ export const loginUser = async (req: Request, res: Response) => {
     if (!user) {
       return res.status(401).json({ message: 'User does not exist' });
     }
+    if(user.password !== password) {
+      return res.status(401).json({ message: 'Wrong password' });
+    }
 
     // If user exists, generate JWT token
-    const token = jwt.sign({ userId: user._id}, JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, email: user.email}, JWT_SECRET, {
       expiresIn: '1h',
     });
 
-    res.status(200).json({ message: 'Login successfull' });
+    res.status(200).json({ message: 'Login successfull', token });
   } catch(e) {
     console.error(e);
     res.status(500).json({ message: 'Server internal error' });

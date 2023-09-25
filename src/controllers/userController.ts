@@ -1,5 +1,6 @@
 import User from '../models/User';
 import { Request, Response } from 'express';
+import passport from 'passport';
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -21,6 +22,25 @@ export const createUser = async (req: Request, res: Response) => {
     console.error('Erro ao criar usuário:', e);
     return res.status(500).json({ message: 'Internal server error' });
   }
+}
+
+export const loginUser = (req: Request, res: Response) => {
+  passport.authenticate('local', (err: any, user: any, info: any) => {
+    if(err) {
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+    if(!user) {
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    req.login(user, (err) => {
+      if(err) {
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+      return res.status(200).json({ message: 'Login successful' });
+    });
+
+  })(req,res);
 }
 
 export const logoutUser = (req: Request, res: Response) => {

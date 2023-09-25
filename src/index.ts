@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
 const authRoutes = require('./routes/authRoutes');
 const databaseAtlas = require('./config/database');
+
 const port = 3000;
 const app = express();
 

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const userDB = process.env.userDB;
 const passwordDB = process.env.passwordDB;
 
-const connectionString = `mongodb+srv://${userDB}:${passwordDB}@apicluster.9roedc7.mongodb.net/?retryWrites=true&w=majority`;
+const connectionString = `mongodb+srv://${userDB}:${passwordDB}@cluster0.repjv9o.mongodb.net/?retryWrites=true&w=majority`;
 
 async function connectAtlas() {
   try {

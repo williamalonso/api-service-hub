@@ -1,6 +1,6 @@
 const express = require('express');
 const authRoutes = require('./routes/authRoutes');
-const connectAtlas = require('./config/database');
+const databaseAtlas = require('./config/database');
 const port = 3000;
 const app = express();
 
@@ -11,7 +11,7 @@ app.use(
 
 app.use('/auth', authRoutes);
 
-connectAtlas().then( () => {
+databaseAtlas().then( () => {
   app.listen(port, () => {
     console.log(`Servidor escutando na porta ${port}`);
   });

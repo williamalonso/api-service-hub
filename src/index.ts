@@ -15,8 +15,6 @@ app.use('/auth', authRoutes);
 
 import authenticateToken from './middleware/authenticateToken';
 app.post('/rota-protegida', authenticateToken, (req, res) => {
-  // Esta rota é protegida e só pode ser acessada se o token JWT for válido
-  // Você pode adicionar lógica adicional aqui
   res.json({ message: 'Rota protegida acessada com sucesso!' });
 });
 

@@ -12,7 +12,7 @@ const authenticateToken = (req: CustomRequest, res: Response, next: NextFunction
   const tokenHeader  = req.headers['token'];
 
   if(!tokenHeader) {
-    return res.status(401).json({ message: 'Invalid token'});
+    return res.status(401).json({ message: "Invalid jwt value or invalid jwt header name, it must be 'token' "});
   }
 
   const token = Array.isArray(tokenHeader) ? tokenHeader[0] : tokenHeader;

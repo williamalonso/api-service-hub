@@ -15,7 +15,7 @@ It's an API made on ExpressJS where you can create an account(login), and access
 
 ## 🚀 Technologies
 
-This project was develop with bellow technologies:
+This project was develop with the following technologies:
 
 - [Node.js](https://nodejs.org/en)
 - [MongoDB Atlas](https://www.mongodb.com/atlas/database)

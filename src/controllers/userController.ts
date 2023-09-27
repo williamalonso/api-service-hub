@@ -1,8 +1,10 @@
+require('dotenv').config();
 import User from '../models/User';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import JWT_SECRET from '../config/tokenJWT';
 import CustomRequest from '../interface/customRequest';
+
+const jwtSECRET = process.env.jwtSECRET;
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -42,7 +44,7 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     // If user exists, generate JWT token
-    const token = jwt.sign({ userId: user._id, email: user.email}, JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, email: user.email}, `${jwtSECRET}`, {
       expiresIn: '24h',
     });
 
@@ -60,7 +62,7 @@ export const refreshToken = async (req: CustomRequest, res: Response) => {
   
   const userId = req.userId;
 
-  const token = jwt.sign({ userId }, JWT_SECRET, {
+  const token = jwt.sign({ userId }, `${jwtSECRET}`, {
     expiresIn: '24h',
   });
 

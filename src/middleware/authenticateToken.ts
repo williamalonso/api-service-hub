@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
-import JWT_SECRET from '../config/tokenJWT';
+require('dotenv').config();
 import { Response, NextFunction } from 'express';
 import CustomRequest from '../interface/customRequest';
+
+const jwtSECRET = process.env.jwtSECRET;
 
 const authenticateToken = (req: CustomRequest, res: Response, next: NextFunction) => {
 
@@ -14,7 +16,7 @@ const authenticateToken = (req: CustomRequest, res: Response, next: NextFunction
 
   const token = Array.isArray(tokenHeader) ? tokenHeader[0] : tokenHeader;
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
+  jwt.verify(token, `${jwtSECRET}`, (err, user) => {
 
     console.log('user', user);
 

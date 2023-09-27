@@ -7,7 +7,7 @@ router.post('/create', createUser);
 router.post('/login', loginUser);
 router.post('/refresh-token', authenticateToken, refreshToken);
 router.get('/teste', authenticateToken, (req: Request, res: Response) => {
-  return res.status(200).json({ message: 'rota protegida' });
+  return res.status(200).json({ message: 'rota protegida reiniciada' });
 })
 
 module.exports = router;

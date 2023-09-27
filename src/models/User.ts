@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 interface IUser extends Document {
   email: string;
   password: string;
+  jwtToken?: string;
 }
 
 const userSchema: Schema = new Schema({
@@ -14,6 +15,9 @@ const userSchema: Schema = new Schema({
   password: {
     type: String,
     required: true,
+  },
+  jwtToken: {
+    type: String,
   }
 });
 

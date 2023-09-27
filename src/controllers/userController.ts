@@ -46,6 +46,9 @@ export const loginUser = async (req: Request, res: Response) => {
       expiresIn: '24h',
     });
 
+    user.jwtToken = token;
+    await user.save();
+
     res.status(200).json({ message: 'Login successfull', token });
   } catch(e) {
     console.error(e);

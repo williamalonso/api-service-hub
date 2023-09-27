@@ -2,6 +2,7 @@ import User from '../models/User';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import JWT_SECRET from '../config/tokenJWT';
+import CustomRequest from '../interface/customRequest';
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -42,7 +43,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
     // If user exists, generate JWT token
     const token = jwt.sign({ userId: user._id, email: user.email}, JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '24h',
     });
 
     res.status(200).json({ message: 'Login successfull', token });
@@ -52,6 +53,14 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 }
 
-export const logoutUser = (req: Request, res: Response) => {
-  return res.status(200).json({ message: 'Logout bem-sucedido' });
+export const refreshToken = async (req: CustomRequest, res: Response) => {
+  
+  const userId = req.userId;
+
+  const token = jwt.sign({ userId }, JWT_SECRET, {
+    expiresIn: '24h',
+  });
+
+  res.status(200).json({ message: 'Token has been renewed', token});
+
 }

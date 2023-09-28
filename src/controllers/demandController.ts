@@ -15,5 +15,4 @@ export const createDemand = async(req: CustomRequest, res: Response) => {
     res.status(400).json({ message: 'Error creating demand' });
   }
 
-
 }

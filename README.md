@@ -43,8 +43,8 @@ This project was develop with the following technologies:
 - You can create an account;
 - You can make login;
 - After logging, you can access admin panel;
-- You can make a CRUD about services demand;
-- You can't access admin panel without logging in;
+- The logged user can make a CRUD about services demands;
+- The user can't access admin panel without logging in;
 
 ---
 

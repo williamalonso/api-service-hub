@@ -6,7 +6,7 @@ import CustomRequest from '../interface/customRequest';
 
 const jwtSECRET = process.env.jwtSECRET;
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async(req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
 
@@ -28,7 +28,7 @@ export const createUser = async (req: Request, res: Response) => {
   }
 }
 
-export const loginUser = async (req: Request, res: Response) => {
+export const loginUser = async(req: Request, res: Response) => {
   
   const { email, password } = req.body;
 
@@ -58,7 +58,7 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 }
 
-export const refreshToken = async (req: CustomRequest, res: Response) => {
+export const refreshToken = async(req: CustomRequest, res: Response) => {
   
   const userId = req.body['_id'];
   const email = req.body['email'];

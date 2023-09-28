@@ -8,7 +8,6 @@ const jwtSECRET = process.env.jwtSECRET;
 const authenticateToken = (req: CustomRequest, res: Response, next: NextFunction) => {
 
   const tokenHeader  = req.headers['token'];
-  console.log('tokenHeader', tokenHeader);
 
   if(!tokenHeader) {
     return res.status(401).json({ message: "Invalid jwt value or invalid jwt header name, it must be 'token' "});
@@ -18,8 +17,6 @@ const authenticateToken = (req: CustomRequest, res: Response, next: NextFunction
 
   jwt.verify(token, `${jwtSECRET}`, (err, user) => {
 
-    console.log('user', user);
-
     if(err) {
       return res.status(403).json({ message: 'Token authentication failed' });
     }
@@ -28,7 +25,6 @@ const authenticateToken = (req: CustomRequest, res: Response, next: NextFunction
 
       req.userId = (user as { _id: string })._id;
       req.userEmail = (user as { email: string }).email;
-      console.log('req.userEmail', req.userEmail);
 
       next();
 

@@ -60,12 +60,32 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const refreshToken = async (req: CustomRequest, res: Response) => {
   
-  const userId = req.userId;
+  const userId = req.body['_id'];
+  const email = req.body['email'];
 
-  const token = jwt.sign({ userId }, `${jwtSECRET}`, {
-    expiresIn: '24h',
-  });
+  try {
 
-  res.status(200).json({ message: 'Token has been renewed', token});
+    const user = await User.findOne({ email });
+
+    if(!user) {
+      return res.status(401).json({ message: 'User does not exist' });
+    }
+    if(user.jwtToken) {
+      const token = jwt.sign({ userId, email }, `${jwtSECRET}`, {
+        expiresIn: '24h',
+      });
+      user.jwtToken = token;
+      await user.save();
+      res.status(200).json({ message: 'Token has been renewed', token});
+    } else {
+      res.status(401).json({ message: 'User does not have any token to be renewed' });
+    }
+
+
+  } catch(e) {
+    console.error(e);
+    res.status(500).json({ message: 'Error renewing token' });
+  }
+
 
 }

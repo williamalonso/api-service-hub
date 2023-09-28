@@ -44,7 +44,7 @@ This project was develop with the following technologies:
 - You can make login;
 - After logging, you can access admin panel;
 - The logged user can make a CRUD about services demands;
-- The user can't access admin panel without logging in;
+- The admin panel routes are protected with middleware;
 
 ---
 

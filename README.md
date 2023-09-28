@@ -8,9 +8,13 @@
 
 </div>
 
+## :card_index_dividers: API Design
+
+![image](https://github.com/williamalonso/api-service-hub/assets/48453909/63d6a2f3-d327-4acb-8ed7-b33e122b6dd4)
+
 ## :lock: Data Modeling
 
-<div align="center">
+<div align="start">
   <img src="/public/schema.png" alt"schema system" title="schema system" width="600" />
 </div>
 

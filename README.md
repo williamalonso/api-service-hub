@@ -2,14 +2,17 @@
     🚧 API Service Hub 🚧
 </h1>
 
-<div align="center">
-  <img src="/public/schema.png" alt"schema system" title="schema system" width="600" />
-</div>
+
 
 ---
 
 </div>
 
+## :lock: Data Modeling
+
+<div align="center">
+  <img src="/public/schema.png" alt"schema system" title="schema system" width="600" />
+</div>
 
 ### 🤔 About the System?
 

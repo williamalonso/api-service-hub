@@ -15,7 +15,7 @@
 ## :lock: Data Modeling
 
 <div align="start">
-  <img src="/public/schema.png" alt"schema system" title="schema system" width="600" />
+  <img src="/public/modelling.png" alt"schema system" title="schema system" width="600" />
 </div>
 
 ### 🤔 About the System?

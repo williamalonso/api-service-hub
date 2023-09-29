@@ -91,3 +91,26 @@ export const updateDemand = async(req: CustomRequest, res: Response) => {
   }
 
 }
+
+export const deleteDemand = async(req: CustomRequest, res: Response) => {
+
+  const userId = req.userId
+  const demandId = req.params.id;
+
+  try {
+
+    const demand = await Demand.findOne({ _id: demandId, user: userId });
+
+    if(!demand) {
+      return res.status(404).json({ message: 'Demand not found to delete' });
+    }
+
+    await Demand.deleteOne({ _id: demandId });
+
+    res.status(200).json({ message: 'Demand deleted successfully' });
+
+  } catch(e) {
+    res.status(400).json({ message: 'Error deleting demand' });
+  }
+
+}

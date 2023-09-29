@@ -1,5 +1,5 @@
 <h1 align="center">
-    🚧 API Service Hub 🚧
+    API Service Hub
 </h1>
 
 

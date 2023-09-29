@@ -63,3 +63,31 @@ export const getDemandById = async(req: CustomRequest, res: Response) => {
   }
 
 }
+
+export const updateDemand = async(req: CustomRequest, res: Response) => {
+  
+  const userId = req.userId;
+  const demandId = req.params.id;
+  const { title, description } = req.body;
+
+  try {
+
+    const demand = await Demand.findOne({ _id: demandId, user: userId });
+
+    if(!demand) {
+      return res.status(404).json({ message: 'Demand not found to update' });
+    }
+
+    demand.title = title;
+    demand.description = description;
+    const updatedDemand = await demand.save();
+
+    res.status(200).json({ demand: updatedDemand });
+
+  } catch(e) {
+
+    res.status(400).json({ message: 'Error updating demand' });
+
+  }
+
+}

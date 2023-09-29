@@ -65,7 +65,7 @@ If you want, you can clone or download this repository:
 $ git clone git@github.com:williamalonso/api-service-hub.git
 ```
 
-Create a `.env` file and add the userDB and passwordDB variables with your AtlasDB credentials.
+Create a `.env` file and add the userDB, passwordDB (from MongoDB Atlas) and jwtSECRET as your credentials.
 
 After downloading or cloning the repository, run the `npm i` command.
 

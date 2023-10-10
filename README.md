@@ -34,6 +34,7 @@ This project was develop with the following technologies:
 - [Mongoose](https://mongoosejs.com)
 - [Nodemon](https://nodemon.io)
 - [JWT Authentication](https://jwt.io)
+- [Swagger](https://swagger.io)
 - [TypeScript](https://www.typescriptlang.org)
 
 ---

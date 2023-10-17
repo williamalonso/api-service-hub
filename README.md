@@ -72,4 +72,6 @@ After downloading or cloning the repository, run the `npm i` command.
 
 To run the application, give it the command `npm start` which is already configured to run Nodemon.
 
+Once the application is runing, access the url `localhost:3000` where you can see the Swagger Api.
+
 <h3 align="center">William Alonso</h3>

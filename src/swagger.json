@@ -65,7 +65,8 @@
     "/auth/login": {
       "post": {
         "summary": "User login",
-        "description": "Authenticates a user based on the data provided",
+        "description": "You can make login on the app",
+        "tags": ["Users"],
         "requestBody": {
           "description": "User login data",
           "content": {
@@ -115,6 +116,23 @@
       "post": {
         "summary": "Creates a new token",
         "description": "Client can request a refresh token",
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Refresh token",
           "content": {
@@ -164,6 +182,23 @@
       "post": {
         "summary": "Creates a new demand",
         "description": "The logged user can create a new service demand based on the data provided",
+        "tags": ["Demand"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "description": "Creates a new demand",
           "content": {
@@ -203,16 +238,31 @@
       "get": {
         "summary": "List all user`s demand",
         "description": "List all user`s demand",
+        "tags": ["Demand"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "userId",
             "in": "path", 
+            "description": "User ID",
             "required": true,
             "schema": {
               "type": "string",
               "example": "6516159b00b18103f29d7369"
-            },
-            "description": "User ID"
+            }
           }
         ],
         "responses": {
@@ -236,28 +286,38 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       }
     },
     "/admin/demand/{id}": {
       "get": {
         "summary": "List user demand by id",
         "description": "List user demand by id",
+        "tags": ["Demand"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "id",
             "in": "path", 
+            "description": "Demand ID",
             "required": true,
             "schema": {
               "type": "string",
-              "example": "651615d800b18103f29d736e"
-            },
-            "description": "Demand ID"
+              "example": "6516159b00b18103f29d7369"
+            }
           }
         ],
         "responses": {
@@ -287,16 +347,152 @@
               }
             }
           }
-        },
+        }
+      }
+    },
+    "/admin/demand/update/{id}": {
+      "put": {
+        "summary": "Update demand by id",
+        "description": "Update demand by id",
+        "tags": ["Demand"],
         "security": [
           {
             "bearerAuth": []
           }
         ],
-        "examples": {
-          "jwtTokenExample": {
-            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...yourJWTTokenHere",
-            "summary": "Token JWT example"
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path", 
+            "description": "Demand ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6516159b00b18103f29d7369"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update demand by id",
+          "content": {
+            "application/json": {
+              "example": {
+                "title": "updated title",
+                "description": "updated description"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Demand updated succesfuly",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Demand updated succesfuly",
+                  "demand": {
+                    "_id": "651615d800b18103f29d736e",
+                    "title": "Title updated succesfulyd",
+                    "description": "Description updated succesfuly",
+                    "user": "6516159b00b18103f29d7369"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error updating demand",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Error updating demand"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Demand not found to update",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Demand not found to update"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/demand/delete/{id}": {
+      "delete": {
+        "summary": "Delete demand by id",
+        "description": "Delete demand by id",
+        "tags": ["Demand"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "JWT Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path", 
+            "description": "Demand ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "6516159b00b18103f29d7369"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Demand deleted successfully",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Demand deleted successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error deleting demand",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Error deleting demand"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Demand not found to delete",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Demand not found to delete"
+                }
+              }
+            }
           }
         }
       }

@@ -62,7 +62,7 @@ The jwt version is `9.0.2`.
 If you want, you can clone or download this repository:
 
 ```
-# Clone o repositório
+# Clone the repository
 $ git clone git@github.com:williamalonso/api-service-hub.git
 ```
 

@@ -4,7 +4,7 @@ import demandRoutes from './routes/demandRoutes';
 const databaseAtlas = require('./config/database');
 import swaggerRoutes from './routes/swaggerRoutes';
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 const app = express();
 
 app.use(
